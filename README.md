@@ -9,14 +9,22 @@ An end-to-end Python and Bash feature engineering pipeline designed to ingest no
 - **Leakage Prevention:** Strict walk-forward transformation splits to ensure zero lookahead bias.
 - **Production Pipeline:** Shell-script orchestration (`run_pipeline.sh`) with `pytest` suite validation and structured logging.
 
-## Project Structure
-```text
+## 📌 Architecture & Design
+
 volatility-feature-pipeline/
 │
 ├── data/
 │   ├── raw/                  # Downloaded OHLCV raw data
-│   └── processed/            # Scaled, regime-labeled parquet datasets
-├── logs/                     # Pipeline execution logs
-├── notebooks/                # Exploratory Data Analysis & visual verification
-├── scripts/                  # Core Python modules and orchestration scripts
-└── tests/                    # Unit and integration test suite
+│   └── processed/            # Scaled, regime-labeled Parquet datasets
+├── logs/                     # Pipeline execution and audit logs
+├── notebooks/
+│   └── 01_eda_and_regime_analysis.ipynb   # Visual regime analysis & correlation EDA
+├── scripts/
+│   ├── fetch_data.py         # Multi-asset fetch & calendar synchronization
+│   ├── build_features.py     # Feature engineering & stationarity transforms
+│   └── train_regimes.py      # Unsupervised HMM regime classification
+├── tests/
+│   └── test_pipeline.py      # Pytest data quality & leakage tests
+├── run_pipeline.sh           # Master Bash execution runner
+├── requirements.txt
+└── README.md
